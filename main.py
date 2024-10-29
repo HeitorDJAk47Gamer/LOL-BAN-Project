@@ -23,8 +23,6 @@ async def stats():
     await asyncio.sleep(15 * 60)
     await ban.change_presence(activity=disnake.Activity(type=disnake.ActivityType.watching, name=f'ANTI_LOL LIGADO!'))
 
-
-
 @ban.event
 async def on_presence_update(before, after):
     # Verifica se o usuário começou a jogar algo
