@@ -1,4 +1,4 @@
-import json, disnake, asyncio, datetime
+import json, disnake, asyncio, datetime, random
 from disnake.ext import commands, tasks
 from disnake.ext.commands import cooldown, has_permissions, MissingPermissions, BucketType 
 
@@ -11,7 +11,19 @@ ban = commands.Bot(command_prefix=commands.when_mentioned_or(prefix), case_insen
 
 @ban.event
 async def on_ready():
+    calc = ban.latency * 1000
+    pong = round(calc)
     print(f'O bot {ban.user} está pronto!')
+    print(f'Atualmente meu ping é de {pong} ms')
+    stats.start()
+
+@tasks.loop(minutes=30)
+async def stats():
+    await ban.change_presence(activity=disnake.Activity(type=disnake.ActivityType.playing, name=f'Tudo menos LOL'))
+    await asyncio.sleep(15 * 60)
+    await ban.change_presence(activity=disnake.Activity(type=disnake.ActivityType.watching, name=f'ANTI_LOL LIGADO!'))
+
+
 
 @ban.event
 async def on_presence_update(before, after):
