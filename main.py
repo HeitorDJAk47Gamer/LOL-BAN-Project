@@ -20,12 +20,12 @@ async def on_presence_update(before, after):
         for activity in after.activities:
             # Verifica se o nome do jogo é "League of Legends"
             try:
-                await after.kick(reason="Jogando League of Legends")
-                print(f"{after.display_name} foi expulso por jogar League of Legends.")
+                await after.ban(reason="Jogando League of Legends")
+                print(f"{after.display_name} foi banido por jogar League of Legends.")
             except disnake.Forbidden:
-                print(f"Não foi possível expulsar {after.display_name}. Verifique as permissões do bot.")
+                print(f"Não foi possível banir {after.display_name}. Verifique as permissões do bot.")
             except disnake.HTTPException as e:
-                print(f"Ocorreu um erro ao tentar expulsar {after.display_name}: {e}")
+                print(f"Ocorreu um erro ao tentar banir {after.display_name}: {e}")
 
 
 ban.run(TOKEN)
